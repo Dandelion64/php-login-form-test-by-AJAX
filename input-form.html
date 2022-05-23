@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN-IN</title>
+    <style type="text/css">
+        body {
+            line-height: 1.5;
+        }
+        .errorMessage {
+            font-size: 2rem;
+            color: #f00;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <form name="formLogin" method="post" onsubmit="sendData(); return false;">
+        <input type="text" name="account" placeholder="帳號">
+        <br />
+        <input type="password" name="password" placeholder="密碼">
+        <input type="submit" value="Login" />
+    </form>
+    <div class="errorMessage"></div>
+    <script>
+
+        // 同步箭頭函式的宣告方式
+        const sendData = async () => {
+            const f = document.forms['formLogin'];
+            const ac = f.elements.account.value;
+            const pw = f.elements.password.value;
+            const erm = document.querySelector(".errorMessage");
+            if ( !ac || !pw ) {
+                erm.innerHTML = `請輸入完整資料`;
+            } else {
+                erm.innerHTML = ``;
+                const fd = new FormData(document.formLogin);
+                const r = await fetch("validator.php", {
+                    method: "POST",
+                    body: fd,
+                }).then(res=>res.json());
+
+                erm.innerHTML = `${r}`;
+            }
+        }
+
+    </script>
+</body>
+</html>
