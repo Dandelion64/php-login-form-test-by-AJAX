@@ -91,6 +91,8 @@ if (isset($_POST['account'])) {
                     body: fd,
                 });
                 // console.log(fd);
+                // f.elements.account.value = '';
+                // f.elements.password.value = '';
             }
         }
 
