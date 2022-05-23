@@ -28,7 +28,13 @@ if (isset($_POST['account'])) {
         if (!empty($users[$_POST['account']])) {
             if ($_POST['password'] === $users[$_POST['account']]['password']) {
                 // 登入成功
-                $output['msg'] = '登入成功';
+                // $output['msg'] = $users[$_POST['account']]['nickname'] . '登入成功';
+                $_SESSION['user'][$_POST['account']] = [
+                    'nickname' => $users[$_POST['account']]['nickname']
+                ];
+                $output['msg'] = $_SESSION['user'][$_POST['account']]['nickname'] . '升天吧';
+                // session_destroy();
+
             } else {
                 // 帳號正確但密碼錯誤
                 $output['msg'] = '密碼錯誤';
@@ -38,11 +44,11 @@ if (isset($_POST['account'])) {
             $output['msg'] = '帳號錯誤';
         }
 
-        echo json_encode($output['msg'], JSON_UNESCAPED_UNICODE);
+        echo json_encode($output['msg']);
         exit;
     } else {
         $output['msg'] = '帳號不存在';
-        echo json_encode($output['msg'], JSON_UNESCAPED_UNICODE);
+        echo json_encode($output['msg']);
         exit;
     }
 }
