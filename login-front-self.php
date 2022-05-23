@@ -55,9 +55,13 @@ if (isset($_POST['account'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN-IN</title>
     <style type="text/css">
+        body {
+            line-height: 1.5;
+        }
         .errorMessage {
             font-size: 2rem;
             color: #f00;
+            font-weight: 900;
         }
     </style>
 </head>
@@ -81,11 +85,11 @@ if (isset($_POST['account'])) {
                 erm.innerHTML = `請輸入完整資料`;
             } else {
                 erm.innerHTML = ``;
-                // const fd = new FormData(document.formLogin);
-                // const r = await fetch("login-self.php", {
-                //     method: "POST",
-                //     body: fd,
-                // });
+                const fd = new FormData(document.formLogin);
+                const r = await fetch("login-front-self.php", {
+                    method: "POST",
+                    body: fd,
+                });
                 // console.log(fd);
             }
         }
